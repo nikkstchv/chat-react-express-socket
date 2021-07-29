@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useReducer, useEffect } from 'react';
+import socket from './socket';
+
+import reducer from './reducer';
+import JoinBlock from './components/JoinBlock'
 
 function App() {
+  const [state, dispatch] = useReducer(reducer, {
+    joined: false,
+    roomId: null,
+    userName: null
+  });
+
+  const onLogin = (obj) => {
+    dispatch({
+      type: 'JOINED',
+      payload: obj,
+    });
+    socket.emit('ROOM:JOIN', obj);
+  };
+
+  useEffect(() => {
+    socket.on('ROOM:JOINED', users => {
+      console.log('новый пользователь', users);
+    })
+  }, []);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="wrapper">
+      {!state.joined && <JoinBlock onLogin={onLogin} />}
     </div>
+
   );
 }
 
