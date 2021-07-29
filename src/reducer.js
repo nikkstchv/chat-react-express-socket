@@ -4,11 +4,21 @@ const reducer = (state, action) => {
       return {
         ...state,
         joined: true,
-        roomId: action.payload.userName,
-        userName: action.payload.roomId,
+        roomId: action.payload.roomId,
+        userName: action.payload.userName,
 
       };
-  
+    case 'SET_USERS':
+      return {
+        ...state,
+        users: action.payload
+      };
+    case 'SET_MESSAGES':
+      return {
+        ...state,
+        messages: action.payload
+      };
+
     default:
       return state;
   }
