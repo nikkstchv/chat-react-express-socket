@@ -1,3 +1,14 @@
+# Чат на ReactJS + NodeJS.
+
+- серверная на NodeJS
+- подключение к сокетам через ReactJS.
+
+Стек:
+- ReactJS
+- NodeJS / Express
+- Socket.IO (frontend + backend)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
